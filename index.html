@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proibições Éticas na Enfermagem — Resolução COFEN 311/2007</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+  <!-- Basecoat CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/basecoat.cdn.min.css">
+
+  <!-- Shell tokens and layouts -->
+  <style>
+/* Skip artifact shell — fixed styles served beside every artifact.
+   Complements basecoat; artifacts override --accent for their own identity. */
+:root {
+  color-scheme: light dark;
+  --accent: #2563eb;
+  --accent-contrast: #ffffff;
+  --accent-text: color-mix(in srgb, var(--accent) 72%, #000);
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --text: #14171f;
+  --text-muted: #5b6472;
+  --border: rgba(20, 23, 31, 0.10);
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(20, 23, 31, 0.08);
+  --space: 16px;
+}
+/* Theme resolution. Without data-theme the viewer's system preference decides,
+   as it always did. With it, the artifact's own choice wins in BOTH directions:
+   a page that hardcodes one palette must not be handed the opposite set of
+   tokens by the machine it happens to be opened on. The dark values appear
+   twice because a media query cannot be folded into a selector list.
+   The attribute sits inside :where() so these blocks keep the specificity of a
+   bare :root — the page's own <style> is linked after this file and must go on
+   overriding any token it wants, exactly as it could before. */
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+    --bg: #101318;
+    --surface: #181c23;
+    --text: #eef1f6;
+    --text-muted: #9aa4b2;
+    --border: rgba(238, 241, 246, 0.12);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+}
+:root:where([data-theme="dark"]) {
+  color-scheme: dark;
+  --accent-text: color-mix(in srgb, var(--accent) 78%, #fff);
+  --bg: #101318;
+  --surface: #181c23;
+  --text: #eef1f6;
+  --text-muted: #9aa4b2;
+  --border: rgba(238, 241, 246, 0.12);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+:root:where([data-theme="light"]) { color-scheme: light; }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+
+.shell-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.shell-section { padding: calc(var(--space) * 2) 0; }
+.shell-grid { display: grid; gap: var(--space); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.shell-toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: var(--space); }
+.shell-footer { padding: 24px 0 40px; color: var(--text-muted); font-size: 13px; }
+
+.shell-hero { padding: calc(var(--space) * 3) 0 calc(var(--space) * 2); }
+.shell-hero h1 { font-size: clamp(26px, 4vw, 40px); line-height: 1.15; margin: 0 0 10px; text-wrap: balance; }
+.shell-hero p { color: var(--text-muted); max-width: 60ch; margin: 0; }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space);
+}
+
+.kpi { display: flex; flex-direction: column; gap: 4px; }
+.kpi .kpi-value { font-size: 28px; font-weight: 650; line-height: 1.1; }
+.kpi .kpi-label { font-size: 13px; color: var(--text-muted); }
+.kpi .kpi-delta { font-size: 12.5px; font-weight: 600; }
+.kpi .kpi-delta.up { color: #0a8f3c; }
+.kpi .kpi-delta.down { color: #cf3131; }
+
+table.shell-table { border-collapse: collapse; width: 100%; font-size: 14px; }
+table.shell-table th {
+  text-align: left; font-size: 11.5px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-muted); font-weight: 600;
+}
+table.shell-table th, table.shell-table td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--border); }
+table.shell-table td.num, table.shell-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.shell-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+
+.chart-box { width: 100%; min-height: 220px; }
+.chart-box svg { width: 100%; height: auto; display: block; }
+
+.muted { color: var(--text-muted); }
+.accent { color: var(--accent-text); }
+.shell-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-text);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shell-fade { animation: shell-fade 400ms ease both; }
+  @keyframes shell-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+
+</style>
+  
+
+  <style>
+    :root {
+      --accent: #2e7d32; /* Verde sóbrio da Saúde / Enfermagem */
+      --accent-contrast: #ffffff;
+      --accent-soft: #f1f8e9;
+      --accent-border: #a5d6a7;
+      --card-hover-border: #2e7d32;
+      --danger: #b91c1c;
+      --danger-bg: #fef2f2;
+      --danger-border: #fecaca;
+      --warning: #b45309;
+      --warning-bg: #fffbeb;
+      --success: #15803d;
+      --success-bg: #f0fdf4;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Hero custom badge and polish */
+    .cofen-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #ffffff;
+      border: 1px solid #a5d6a7;
+      color: #1b5e20;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      box-shadow: 0 1px 3px rgba(46, 125, 50, 0.08);
+    }
+
+    .cofen-badge svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .hero-banner {
+      background: linear-gradient(180deg, #e8f5e9 0%, #f1f8e9 100%);
+      border-bottom: 1px solid #c8e6c9;
+      padding: 2.75rem 1rem 2.25rem;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 2.15rem;
+      font-weight: 800;
+      color: #14432a; /* Verde escuro de alta legibilidade */
+      letter-spacing: -0.02em;
+      margin: 0.75rem 0 0.5rem;
+    }
+
+    .hero-sub {
+      max-width: 780px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: #2e5339;
+    }
+
+    .hero-sub strong {
+      color: #14432a;
+    }
+
+    /* Botões sólidos do Cabeçalho */
+    .btn-hero-solid {
+      background-color: #2e7d32 !important;
+      color: #ffffff !important;
+      border: 1px solid #1b5e20 !important;
+      font-weight: 600;
+      padding: 0.5rem 1.1rem;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(46, 125, 50, 0.25);
+      transition: all 0.18s ease;
+      cursor: pointer;
+    }
+
+    .btn-hero-solid:hover {
+      background-color: #1b5e20 !important;
+      border-color: #14432a !important;
+      color: #ffffff !important;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(46, 125, 50, 0.32);
+    }
+
+    /* Filtros e Controles */
+    .filter-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-top: -1.25rem;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    }
+
+    .filter-group-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .chip-btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .chip-btn:hover {
+      border-color: var(--accent);
+      background: #f1f8e9;
+      color: #1b5e20;
+    }
+
+    .chip-btn.active {
+      background: #2e7d32;
+      border-color: #2e7d32;
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(46, 125, 50, 0.32);
+    }
+
+    .chip-btn .badge-count {
+      font-size: 0.72rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.07);
+    }
+
+    .chip-btn.active .badge-count {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+    }
+
+    /* Cards Grid */
+    .prohibition-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.15rem;
+      margin-top: 1.25rem;
+    }
+
+    .prohibition-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .prohibition-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--card-hover-border);
+      box-shadow: 0 8px 20px rgba(46, 125, 50, 0.14);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .art-badge {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #991b1b;
+      background: #fee2e2;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      padding: 0.2rem 0.55rem;
+      white-space: nowrap;
+    }
+
+    .scope-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.2rem 0.55rem;
+      border-radius: 9999px;
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+
+    .scope-tag.nurse-only {
+      background: #e0f2fe;
+      color: #0369a1;
+      border-color: #bae6fd;
+      font-weight: 700;
+    }
+
+    .card-header-main {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .card-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      border-radius: 6px;
+      color: var(--accent-text);
+    }
+
+    .card-icon svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 2.2;
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .card-chapter {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-summary {
+      font-size: 0.88rem;
+      color: #334155;
+      line-height: 1.45;
+      margin-bottom: 0.85rem;
+      flex-grow: 1;
+    }
+
+    .card-action {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-text);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: auto;
+    }
+
+    .card-action svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.15s ease;
+    }
+
+    .prohibition-card:hover .card-action svg {
+      transform: translateX(3px);
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: var(--surface);
+      border-radius: var(--radius);
+      border: 1px dashed var(--border);
+    }
+
+    /* Modal de Artigo */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-dialog {
+      background: var(--surface);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 620px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      animation: modalFadeIn 0.2s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-head {
+      padding: 1.25rem 1.5rem;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #1e293b;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .modal-full-text {
+      background: #f8fafc;
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.15rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.95rem;
+      color: #0f172a;
+      margin: 0.75rem 0 1.25rem;
+    }
+
+    .modal-meta-box {
+      background: #f1f5f9;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #475569;
+    }
+
+    .close-modal-btn {
+      background: transparent;
+      border: none;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      color: #64748b;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .close-modal-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    /* Seção Penalidades */
+    .penalties-section {
+      background: #fafafa;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 0;
+      margin-top: 3.5rem;
+    }
+
+    .penalties-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .penalty-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.15rem;
+      position: relative;
+      border-top: 4px solid var(--accent);
+      transition: transform 0.15s ease;
+    }
+
+    .penalty-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .penalty-number {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent-text);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+    }
+
+    .penalty-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.4rem;
+    }
+
+    .penalty-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .gravity-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+
+    .pill-leve { background: #dcfce7; color: #15803d; }
+    .pill-grave { background: #fef3c7; color: #b45309; }
+    .pill-gravissima { background: #fee2e2; color: #b91c1c; }
+
+    /* Quiz Interativo */
+    .quiz-section {
+      padding: 3rem 0;
+    }
+
+    .quiz-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .quiz-scenario {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 1rem;
+      line-height: 1.45;
+    }
+
+    .quiz-controls {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-quiz {
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.55rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .btn-proibido {
+      background: #fee2e2;
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+    .btn-proibido:hover:not(:disabled) {
+      background: #fecaca;
+      border-color: #f87171;
+    }
+
+    .btn-permitido {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+    .btn-permitido:hover:not(:disabled) {
+      background: #bbf7d0;
+      border-color: #86efac;
+    }
+
+    .btn-quiz:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .quiz-feedback {
+      margin-top: 1rem;
+      padding: 0.85rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .feedback-correct {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #14532d;
+    }
+
+    .feedback-incorrect {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #7f1d1d;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Print styles */
+    @media print {
+      .filter-panel, .quiz-section, .btn-print, .close-modal-btn {
+        display: none !important;
+      }
+      .prohibition-card {
+        break-inside: avoid;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+      }
+      .hero-banner {
+        background: none !important;
+        padding: 0 0 1rem 0 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO SECTION -->
+  <header class="hero-banner">
+    <div class="shell-container">
+      <div class="cofen-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2L1 7l11 5 9-4.09V17h2V7L12 2zm0 13l-7-3.18V17l7 3.18L19 17v-5.18L12 15z"/></svg>
+        <span>Resolução COFEN nº 311/2007 • Código de Ética</span>
+      </div>
+      <h1 class="hero-title">Proibições Éticas no Exercício da Enfermagem</h1>
+      <p class="hero-sub">
+        <strong>Objetivo de Aprendizagem:</strong> Conhecer detalhadamente as proibições legais e éticas relativas à atuação de enfermeiros, técnicos e auxiliares de enfermagem, fortalecendo a prática segura e o respaldo profissional.
+      </p>
+
+      <div style="margin-top: 1.35rem; display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        <button class="btn-hero-solid btn-print" onclick="window.print()">
+          <svg style="width:16px;height:16px;vertical-align:-2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4H7v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          <span>Imprimir / Salvar em PDF</span>
+        </button>
+        <a href="#penalidades" class="btn-hero-solid">
+          <svg style="width:16px;height:16px;vertical-align:-2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          <span>Ver Penalidades (Art. 118)</span>
+        </a>
+        <a href="#quiz" class="btn-hero-solid">
+          <svg style="width:16px;height:16px;vertical-align:-2px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Testar com Quiz Interativo</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell-container" style="margin-top: 1.5rem; margin-bottom: 4rem;">
+
+    <!-- PAINEL DE CONTROLE / FILTROS -->
+    <section class="filter-panel" aria-label="Filtros de Proibições">
+      <!-- 1. Filtro por Profissão -->
+      <div style="margin-bottom: 1.15rem;">
+        <div class="filter-group-label">
+          <span>1. Filtrar por Categoria Profissional:</span>
+          <span id="statScopeCount" style="color: var(--accent-text); font-weight:700;">Mostrando todas</span>
+        </div>
+        <div class="chips-row" id="roleChipsContainer" role="group" aria-label="Filtro de categoria">
+          <button class="chip-btn active" data-role="all">Todas as categorias <span class="badge-count" id="countAll">34</span></button>
+          <button class="chip-btn" data-role="nurse">Enfermeiro (específicas + comuns) <span class="badge-count" id="countNurse">34</span></button>
+          <button class="chip-btn" data-role="tech">Técnico em Enfermagem <span class="badge-count" id="countTech">32</span></button>
+          <button class="chip-btn" data-role="aux">Auxiliar de Enfermagem <span class="badge-count" id="countAux">32</span></button>
+        </div>
+      </div>
+
+      <!-- 2. Filtro por Bloco Temático -->
+      <div>
+        <div class="filter-group-label">
+          <span>2. Filtrar por Capítulo / Bloco Temático:</span>
+          <span id="statThemeCount">8 blocos</span>
+        </div>
+        <div class="chips-row" id="blockChipsContainer" role="group" aria-label="Filtro por bloco temático">
+          <button class="chip-btn active" data-block="all">Todos os blocos <span class="badge-count">34</span></button>
+          <button class="chip-btn" data-block="1">B1: Relações Profissionais <span class="badge-count">2</span></button>
+          <button class="chip-btn" data-block="2">B2: Pessoa, Família e Coletividade <span class="badge-count">10</span></button>
+          <button class="chip-btn" data-block="3">B3: Trab. Enfermagem e Saúde <span class="badge-count">2</span></button>
+          <button class="chip-btn" data-block="4">B4: Org. da Categoria <span class="badge-count">4</span></button>
+          <button class="chip-btn" data-block="5">B5: Org. Empregadoras <span class="badge-count">8</span></button>
+          <button class="chip-btn" data-block="6">B6: Sigilo Profissional <span class="badge-count">2</span></button>
+          <button class="chip-btn" data-block="7">B7: Ensino, Pesquisa e Produção <span class="badge-count">9</span></button>
+          <button class="chip-btn" data-block="8">B8: Publicidade <span class="badge-count">5</span></button>
+        </div>
+      </div>
+
+      <!-- Busca textual rápida -->
+      <div style="margin-top: 1rem; display: flex; gap: 0.5rem; align-items: center;">
+        <div style="position: relative; flex-grow: 1;">
+          <input type="search" id="searchInput" placeholder="Pesquise por artigo, palavra-chave (ex: aborto, delegar, prescrição, sigilo)..." style="width: 100%; padding: 0.55rem 0.85rem; font-size: 0.9rem; border: 1px solid var(--border); border-radius: 6px; background: #fff;">
+        </div>
+        <button class="btn" id="btnResetFilters" style="padding: 0.55rem 0.9rem; font-size: 0.85rem; border: 1px solid var(--border); background: var(--surface);">
+          Limpar Filtros
+        </button>
+      </div>
+    </section>
+
+    <!-- STATUS BAR / CONTADOR -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin: 1.25rem 0 0.5rem; font-size: 0.88rem; color: var(--text-muted);">
+      <div>
+        Exibindo <strong id="visibleCount" style="color: #0f172a;">34</strong> de <strong>34</strong> proibições catalogadas
+      </div>
+      <div style="font-size: 0.8rem;">
+        <span style="display:inline-block; width:10px; height:10px; background:#e0f2fe; border:1px solid #bae6fd; border-radius:2px; vertical-align:middle; margin-right:4px;"></span>
+        Destaque azul: Específico do Enfermeiro
+      </div>
+    </div>
+
+    <!-- GRADE DE CARTÕES INTERATIVOS -->
+    <div class="prohibition-grid" id="prohibitionsGrid">
+      <!-- Renderizado via Javascript -->
+    </div>
+
+    <!-- ESTADO VAZIO -->
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <h3 style="margin-bottom: 0.5rem; color: #334155;">Nenhuma proibição encontrada</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Tente ajustar os filtros ou os termos pesquisados.</p>
+      <button class="btn btn-primary" onclick="resetAllFilters()">Restaurar todos os filtros</button>
+    </div>
+
+  </main>
+
+  <!-- SEÇÃO INFRAÇÕES E PENALIDADES -->
+  <section id="penalidades" class="penalties-section">
+    <div class="shell-container">
+      <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+        <span class="cofen-badge" style="background:#fff; border-color:#cbd5e1;">Capítulo IV • Arts. 112 a 129</span>
+        <h2 style="font-size: 1.85rem; font-weight: 800; color: #0f172a; margin-top: 0.6rem;">Infrações e Penalidades Disciplinares</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          A inobservância das proibições éticas sujeita os infratores às sanções previstas em lei, aplicadas pelos Conselhos Regionais e Federal de Enfermagem.
+        </p>
+      </div>
+
+      <!-- Diferença conceitual -->
+      <div class="shell-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 1.75rem; gap: 1rem;">
+        <div class="panel" style="border-left: 4px solid var(--accent); background:#fff;">
+          <h4 style="margin:0 0 0.4rem 0; font-size:1rem; color:#0f172a;">Infração Ética (Art. 113)</h4>
+          <p style="margin:0; font-size:0.86rem; color:#475569;">
+            Toda ação, omissão ou conivência que implique desobediência e/ou inobservância às disposições do Código de Ética dos Profissionais de Enfermagem.
+          </p>
+        </div>
+        <div class="panel" style="border-left: 4px solid #64748b; background:#fff;">
+          <h4 style="margin:0 0 0.4rem 0; font-size:1rem; color:#0f172a;">Infração Disciplinar (Art. 114)</h4>
+          <p style="margin:0; font-size:0.86rem; color:#475569;">
+            Inobservância das normas emitidas pelos Conselhos Federal e Regionais de Enfermagem, bem como ordens e deliberações legais dos seus órgãos.
+          </p>
+        </div>
+      </div>
+
+      <!-- 5 Penalidades -->
+      <h3 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-top: 2rem; margin-bottom: 0.5rem;">
+        As 5 Penalidades Previstas (Art. 118)
+      </h3>
+      <div class="penalties-grid">
+        <div class="penalty-card">
+          <div class="penalty-number">Penalidade 1</div>
+          <div class="penalty-title">Advertência Verbal</div>
+          <p class="penalty-desc">Admoestação ao infrator de forma reservada, que será registrada no prontuário do mesmo, na presença de duas testemunhas.</p>
+        </div>
+        <div class="penalty-card">
+          <div class="penalty-number">Penalidade 2</div>
+          <div class="penalty-title">Multa Pecuniária</div>
+          <p class="penalty-desc">Obrigatoriedade do pagamento de 01 (uma) a 10 (dez) vezes o valor da anuidade da categoria profissional fixada pelo COFEN.</p>
+        </div>
+        <div class="penalty-card">
+          <div class="penalty-number">Penalidade 3</div>
+          <div class="penalty-title">Censura</div>
+          <p class="penalty-desc">Repreensão que será divulgada em publicações oficiais dos Conselhos Federal e Regional de Enfermagem e em jornais de grande circulação.</p>
+        </div>
+        <div class="penalty-card">
+          <div class="penalty-number">Penalidade 4</div>
+          <div class="penalty-title">Suspensão</div>
+          <p class="penalty-desc">Proibição total do exercício profissional da enfermagem por um período de até 29 (vinte e nove) dias, divulgada amplamente.</p>
+        </div>
+        <div class="penalty-card" style="border-top-color: #b91c1c;">
+          <div class="penalty-number" style="color:#b91c1c;">Penalidade 5</div>
+          <div class="penalty-title">Cassação</div>
+          <p class="penalty-desc">Perda do direito ao exercício da profissão por até 30 anos. De competência privativa e exclusiva do Conselho Federal (COFEN).</p>
+        </div>
+      </div>
+
+      <!-- Gravidade, Atenuantes e Agravantes -->
+      <div class="shell-grid" style="grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); margin-top: 2rem; gap: 1.25rem;">
+        <!-- Níveis de Gravidade -->
+        <div class="panel" style="background: #fff;">
+          <h4 style="font-size: 1rem; font-weight: 700; margin-top: 0; margin-bottom: 0.75rem; color: #0f172a;">
+            Gravidade das Infrações (Art. 121)
+          </h4>
+          <div style="margin-bottom: 0.75rem;">
+            <span class="gravity-pill pill-leve">Leves</span>
+            <p style="font-size: 0.83rem; margin: 0.2rem 0; color: #475569;">
+              Ofendem a integridade física, mental ou moral de qualquer pessoa, sem causar debilidade física ou mental nem prejuízos patrimoniais irreparáveis.
+            </p>
+          </div>
+          <div style="margin-bottom: 0.75rem;">
+            <span class="gravity-pill pill-grave">Graves</span>
+            <p style="font-size: 0.83rem; margin: 0.2rem 0; color: #475569;">
+              Provocam perigo de vida, debilidade temporária de membro, sentido ou função em qualquer pessoa, ou causem danos patrimoniais reais.
+            </p>
+          </div>
+          <div>
+            <span class="gravity-pill pill-gravissima">Gravíssimas</span>
+            <p style="font-size: 0.83rem; margin: 0.2rem 0; color: #475569;">
+              Provocam a morte, deformidade permanente, perda ou inutilização de membro, sentido ou função, ou causam dano moral irremediável.
+            </p>
+          </div>
+        </div>
+
+        <!-- Circunstâncias Atenuantes -->
+        <div class="panel" style="background: #fff;">
+          <h4 style="font-size: 1rem; font-weight: 700; margin-top: 0; margin-bottom: 0.75rem; color: var(--success);">
+            Atenuantes (Art. 122)
+          </h4>
+          <ul style="padding-left: 1.2rem; margin: 0; font-size: 0.84rem; color: #475569; display: flex; flex-direction: column; gap: 0.35rem;">
+            <li>Ausência de antecedentes disciplinares éticos (primariedade).</li>
+            <li>Prestação de serviços relevantes à assistência à saúde ou à enfermagem.</li>
+            <li>Ter confessado espontaneamente a autoria da infração cometida.</li>
+            <li>Ter agido sob coação irresistível comprovada.</li>
+            <li>Reparação voluntária ou minoração do dano causado de imediato.</li>
+          </ul>
+        </div>
+
+        <!-- Circunstâncias Agravantes -->
+        <div class="panel" style="background: #fff;">
+          <h4 style="font-size: 1rem; font-weight: 700; margin-top: 0; margin-bottom: 0.75rem; color: var(--danger);">
+            Agravantes (Art. 123)
+          </h4>
+          <ul style="padding-left: 1.2rem; margin: 0; font-size: 0.84rem; color: #475569; display: flex; flex-direction: column; gap: 0.35rem;">
+            <li>Reincidência em infrações ético-disciplinares.</li>
+            <li>Praticar o fato para facilitar ou assegurar execução/vantagem de outro crime.</li>
+            <li>Aproveitar-se de estado de vulnerabilidade, calamidade pública ou emergência.</li>
+            <li>Prática com dolo, premeditação ou conluio entre profissionais.</li>
+            <li>Uso indevido de cargo hierárquico, chefia ou superioridade.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUIZ INTERATIVO "ISTO É PROIBIDO?" -->
+  <section id="quiz" class="quiz-section">
+    <div class="shell-container" style="max-width: 820px;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <span class="cofen-badge">Avaliação Formativa</span>
+        <h2 style="font-size: 1.85rem; font-weight: 800; color: #0f172a; margin-top: 0.6rem;">Quiz: "Isto é Proibido?"</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Analise os cenários do cotidiano assistencial e decida se a conduta é <strong>Proibida</strong> pelo Código de Ética ou se é uma <strong>Conduta Permitida / Amparada</strong>.
+        </p>
+      </div>
+
+      <!-- Cenário 1 -->
+      <div class="quiz-card" id="quizCard1">
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-text); text-transform: uppercase; margin-bottom: 0.35rem;">Cenário 1 de 4</div>
+        <p class="quiz-scenario">
+          "Um técnico de enfermagem recusa-se a atender um paciente em parada cardiorrespiratória sob o argumento de que está em seu horário oficial de intervalo para almoço."
+        </p>
+        <div class="quiz-controls">
+          <button class="btn-quiz btn-proibido" onclick="checkAnswer(1, 'proibido')">
+            <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+            É Proibido
+          </button>
+          <button class="btn-quiz btn-permitido" onclick="checkAnswer(1, 'permitido')">
+            <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            É Permitido
+          </button>
+        </div>
+        <div class="quiz-feedback" id="feedback1"></div>
+      </div>
+
+      <!-- Cenário 2 -->
+      <div class="quiz-card" id="quizCard2">
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-text); text-transform: uppercase; margin-bottom: 0.35rem;">Cenário 2 de 4</div>
+        <p class="quiz-scenario">
+          "Um auxiliar de enfermagem assina o prontuário de um procedimento e medicação que foram totalmente realizados por outro colega da equipe para adiantar o plantão."
+        </p>
+        <div class="quiz-controls">
+          <button class="btn-quiz btn-proibido" onclick="checkAnswer(2, 'proibido')">
+            <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+            É Proibido
+          </button>
+          <button class="btn-quiz btn-permitido" onclick="checkAnswer(2, 'permitido')">
+            <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            É Permitido
+          </button>
+        </div>
+        <div class="quiz-feedback" id="feedback2"></div>
+      </div>
+
+      <!-- Cenário 3 -->
+      <div class="quiz-card" id="quizCard3">
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-text); text-transform: uppercase; margin-bottom: 0.35rem;">Cenário 3 de 4</div>
+        <p class="quiz-scenario">
+          "Um enfermeiro delega a execução do curativo de um paciente clinicamente estável a um técnico de enfermagem devidamente capacitado e sob sua supervisão direta."
+        </p>
+        <div class="quiz-controls">
+          <button class="btn-quiz btn-proibido" onclick="checkAnswer(3, 'proibido')">
+            <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+            É Proibido
+          </button>
+          <button class="btn-quiz btn-permitido" onclick="checkAnswer(3, 'permitido')">
+            <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            É Permitido
+          </button>
+        </div>
+        <div class="quiz-feedback" id="feedback3"></div>
+      </div>
+
+      <!-- Cenário 4 -->
+      <div class="quiz-card" id="quizCard4">
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-text); text-transform: uppercase; margin-bottom: 0.35rem;">Cenário 4 de 4</div>
+        <p class="quiz-scenario">
+          "Um profissional de enfermagem posta em sua rede social a foto comemorativa de um paciente recuperado no leito, contendo seu nome completo e prontuário visível, sem prévia autorização por escrito."
+        </p>
+        <div class="quiz-controls">
+          <button class="btn-quiz btn-proibido" onclick="checkAnswer(4, 'proibido')">
+            <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+            É Proibido
+          </button>
+          <button class="btn-quiz btn-permitido" onclick="checkAnswer(4, 'permitido')">
+            <svg style="width:16px;height:16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            É Permitido
+          </button>
+        </div>
+        <div class="quiz-feedback" id="feedback4"></div>
+      </div>
+
+      <!-- Placar / Reiniciar Quiz -->
+      <div id="quizScoreBox" style="display:none; text-align:center; padding: 1.25rem; background:#f1f8e9; border:1px solid #a5d6a7; border-radius:8px;">
+        <h4 style="margin:0 0 0.5rem 0; color:#14432a; font-size:1.1rem;">Parabéns! Você completou os 4 cenários práticos.</h4>
+        <p id="quizScoreText" style="margin:0 0 1rem 0; color:#334155; font-size:0.95rem;"></p>
+        <button class="btn btn-primary" onclick="resetQuiz()" style="background-color:#2e7d32; border-color:#1b5e20; color:#ffffff;">Refazer Quiz</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO COMO CITAR ESTE INFOGRÁFICO -->
+  <section id="como-citar" style="padding: 2.75rem 0; background: #f4fbf6; border-top: 1px solid #c8e6c9; border-bottom: 1px solid #c8e6c9;">
+    <div class="shell-container" style="max-width: 820px;">
+      <div style="display: inline-flex; align-items: center; gap: 0.45rem; background: #ffffff; border: 1px solid #a5d6a7; color: #1b5e20; font-weight: 700; font-size: 0.78rem; padding: 0.25rem 0.75rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.65rem;">
+        <svg style="width: 14px; height: 14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        <span>Referência ABNT</span>
+      </div>
+      <h2 style="font-size: 1.6rem; font-weight: 800; color: #14432a; margin: 0 0 1rem 0; letter-spacing: -0.01em;">
+        Como citar este infográfico
+      </h2>
+      <div style="background: #ffffff; border-left: 5px solid var(--accent); border-top: 1px solid #c8e6c9; border-right: 1px solid #c8e6c9; border-bottom: 1px solid #c8e6c9; border-radius: 0 8px 8px 0; padding: 1.25rem 1.4rem; font-size: 0.93rem; color: #1e293b; line-height: 1.65; box-shadow: 0 2px 6px rgba(46, 125, 50, 0.06); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        REBOUÇAS, Cristiana Brasil de Almeida; SILVA, Andréa Soares Rocha da. Proibições éticas no exercício profissional da enfermagem: infográfico interativo. Baseado na Resolução COFEN nº 311/2007. Disponível em: [URL do infográfico]. Acesso em: [data de acesso].
+      </div>
+      <p style="margin: 0.75rem 0 0 0; font-size: 0.85rem; color: #2e5339; font-weight: 500; display: flex; align-items: center; gap: 0.4rem;">
+        <svg style="width: 15px; height: 15px; color: var(--accent); flex-shrink: 0;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Uso educacional permitido com citação da fonte — licença CC BY-NC.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- MODAL DE ARTIGO COMPLETO -->
+  <div class="modal-overlay" id="articleModal" role="dialog" aria-modal="true" aria-labelledby="modalArtTitle" onclick="handleModalOverlayClick(event)">
+    <div class="modal-dialog" onclick="event.stopPropagation()">
+      <div class="modal-head">
+        <div>
+          <span id="modalChapterBadge" style="font-size: 0.72rem; font-weight:700; text-transform:uppercase; color:var(--accent-text);"></span>
+          <h3 id="modalArtTitle" style="margin: 0.25rem 0 0; font-size: 1.25rem; color: #0f172a;"></h3>
+        </div>
+        <button class="close-modal-btn" onclick="closeArticleModal()" aria-label="Fechar janela">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="font-size:0.8rem; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Texto Integral da Resolução COFEN 311/2007:</div>
+        <div class="modal-full-text" id="modalArtFullText"></div>
+
+        <div class="modal-meta-box">
+          <div style="margin-bottom: 0.35rem;">
+            <strong>Aplicação:</strong> <span id="modalScopeText"></span>
+          </div>
+          <div style="margin-bottom: 0.35rem;">
+            <strong>Fundamento Ético:</strong> Proteção da dignidade humana, do sigilo profissional e da segurança do paciente no cuidado de saúde.
+          </div>
+          <div>
+            <strong>Referência Legal:</strong> Resolução COFEN nº 311/2007, Capítulo correspondente às Proibições.
+          </div>
+        </div>
+      </div>
+      <div style="padding: 0.9rem 1.5rem; background: #f8fafc; border-top: 1px solid var(--border); text-align: right;">
+        <button class="btn btn-primary" onclick="closeArticleModal()" style="font-size: 0.85rem; padding: 0.45rem 1.15rem;">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RODAPÉ DE CRÉDITOS E METADADOS -->
+  <footer class="shell-footer" style="margin-top: 2rem; border-top: 1px solid var(--border); padding: 2.5rem 1rem; background: #f8fafc;">
+    <div class="shell-container" style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.85rem; color: #64748b; text-align: center;">
+      <div>
+        <strong>Proibições Éticas no Exercício Profissional da Enfermagem</strong> — Painel Pedagógico Interativo
+      </div>
+      <div style="max-width: 780px; margin: 0 auto; line-height: 1.6;">
+        <span><strong>Autoria e Concepção:</strong> Cristiana Brasil de Almeida Rebouças e Andréa Soares Rocha da Silva.</span><br>
+        <span><strong>Fonte Primária:</strong> Resolução COFEN nº 311/2007 (Código de Ética dos Profissionais de Enfermagem).</span><br>
+        <span><strong>Público-Alvo:</strong> Enfermeiros em formação acadêmica — material de apoio pedagógico para aulas, oficinas e palestras.</span>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 0.5rem;">
+        <span style="display:inline-flex; align-items:center; gap:0.25rem; background:#e2e8f0; color:#334155; padding:0.2rem 0.6rem; border-radius:4px; font-weight:700; font-size:0.75rem;">
+          CC BY-NC
+        </span>
+        <span>Licença Creative Commons Atribuição-NãoComercial (Permitido o uso educacional com citação obrigatória da fonte).</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT DE DADOS E INTERATIVIDADE -->
+  <script>
+    // 1. BASE DE DADOS INTEGRAL DE PROIBIÇÕES (COFEN 311/2007)
+    const PROHIBITIONS_DATA = [
+      // BLOCO 1 — RELAÇÕES PROFISSIONAIS
+      {
+        id: "art8",
+        artNumber: "Art. 8º",
+        blockId: "1",
+        blockName: "Bloco 1: Relações Profissionais",
+        scope: "all", // "all" ou "nurse"
+        title: "Injúria, Calúnia e Difamação",
+        summary: "Promover ou ser conivente com ofensas à honra de colegas de enfermagem, equipe de saúde, trabalhadores ou instituições.",
+        fullText: "Art. 8º Promover e ser conivente com a injúria, calúnia e difamação de membro da equipe de enfermagem, equipe de saúde, trabalhadores de outras áreas, organizações da categoria ou instituições.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>`
+      },
+      {
+        id: "art9",
+        artNumber: "Art. 9º",
+        blockId: "1",
+        blockName: "Bloco 1: Relações Profissionais",
+        scope: "all",
+        title: "Crime e Ilícitos Legais",
+        summary: "Praticar ou ser conivente com contravenção penal, crime ou qualquer ato que fira postulados legais e éticos.",
+        fullText: "Art. 9º Praticar e/ou ser conivente com crime, contravenção penal ou qualquer outro ato que infrinja postulados éticos e legais.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>`
+      },
+
+      // BLOCO 2 — RELAÇÕES COM A PESSOA, FAMÍLIA E COLETIVIDADE
+      {
+        id: "art26",
+        artNumber: "Art. 26",
+        blockId: "2",
+        blockName: "Bloco 2: Pessoa, Família e Coletividade",
+        scope: "all",
+        title: "Omissão em Urgência e Emergência",
+        summary: "Negar assistência de enfermagem em qualquer situação que se caracterize como urgência ou emergência médica.",
+        fullText: "Art. 26 Negar assistência de enfermagem em qualquer situação que se caracterize como urgência ou emergência.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`
+      },
+      {
+        id: "art27",
+        artNumber: "Art. 27",
+        blockId: "2",
+        blockName: "Bloco 2: Pessoa, Família e Coletividade",
+        scope: "all",
+        title: "Assistência sem Consentimento",
+        summary: "Executar ou participar de cuidados sem consentimento do paciente ou seu representante, ressalvado risco iminente de morte.",
+        fullText: "Art. 27 Executar ou participar da assistência à saúde sem o consentimento da pessoa ou de seu representante legal, exceto em iminente risco de morte.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`
+      },
+      {
+        id: "art28",
+        artNumber: "Art. 28",
+        blockId: "2",
+        blockName: "Bloco 2: Pessoa, Família e Coletividade",
+        scope: "all",
+        title: "Aborto Ilegal",
+        summary: "Provocar aborto ou cooperar em interrupção da gravidez fora das hipóteses resguardadas em lei e objeção de consciência.",
+        fullText: "Art. 28 Provocar aborto, ou cooperar em prática destinada a interromper a gestação.\n\nParágrafo único. Nos casos previstos em lei, o profissional deverá decidir de acordo com a sua consciência sobre a sua participação ou não no ato abortivo.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>`
+      },
+      {
+        id: "art29",
+        artNumber: "Art. 29",
+        blockId: "2",
+        blockName: "Bloco 2: Pessoa, Família e Coletividade",
+        scope: "all",
+        title: "Eutanásia e Aceleração do Óbito",
+        summary: "Promover a eutanásia ou participar em práticas destinadas expressamente a antecipar a morte do paciente.",
+        fullText: "Art. 29 Promover a eutanásia ou participar em prática destinada a antecipar a morte do cliente.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>`
+      },
+      {
+        id: "art30",
+        artNumber: "Art. 30",
+        blockId: "2",
+        blockName: "Bloco 2: Pessoa, Família e Coletividade",
+        scope: "all",
+        title: "Medicação sem Conhecimento",
+        summary: "Administrar medicamentos sem conhecer a ação farmacológica da substância e sem certificar-se dos riscos.",
+        fullText: "Art. 30 Administrar medicamentos sem conhecer a ação da droga e sem certificar-se da possibilidade de riscos.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>`
+      },
+      {
+        id: "art31",
+        artNumber: "Art. 31",
+        blockId: "2",
+        blockName: "Bloco 2: Pessoa, Família e Coletividade",
+        scope: "all",
+        title: "Prescrição e Ato Cirúrgico Indevido",
+        summary: "Prescrever fármacos e realizar cirurgias, ressalvadas previsões legais (protocolos) e iminente emergência.",
+        fullText: "Art. 31 Prescrever medicamentos e praticar ato cirúrgico, exceto nos casos previstos na legislação vigente e em situação de emergência.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`
+      },
+      {
+        id: "art32",
+        artNumber: "Art. 32",
+        blockId: "2",
+        blockName: "Bloco 2: Pessoa, Família e Coletividade",
+        scope: "all",
+        title: "Executar Prescrição Insegura",
+        summary: "Executar ordens ou prescrições que sabidamente comprometam a integridade e segurança do usuário.",
+        fullText: "Art. 32 Executar prescrições de qualquer natureza que comprometam a segurança da pessoa.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>`
+      },
+      {
+        id: "art33",
+        artNumber: "Art. 33",
+        blockId: "2",
+        blockName: "Bloco 2: Pessoa, Família e Coletividade",
+        scope: "all",
+        title: "Usurpação de Função Alheia",
+        summary: "Prestar serviços que por sua natureza competem privativamente a outros profissionais, salvo emergências.",
+        fullText: "Art. 33 Prestar serviços que por sua natureza competem a outro profissional, exceto em caso de emergência.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>`
+      },
+      {
+        id: "art34",
+        artNumber: "Art. 34",
+        blockId: "2",
+        blockName: "Bloco 2: Pessoa, Família e Coletividade",
+        scope: "all",
+        title: "Violência e Omissão",
+        summary: "Provocar, cooperar, ser conivente ou omitir-se diante de qualquer forma de violência física ou psicológica.",
+        fullText: "Art. 34 Provocar, cooperar, ser conivente ou omisso com qualquer forma de violência.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 8v4m0 4h.01"/></svg>`
+      },
+      {
+        id: "art35",
+        artNumber: "Art. 35",
+        blockId: "2",
+        blockName: "Bloco 2: Pessoa, Família e Coletividade",
+        scope: "all",
+        title: "Registros Falsos ou Parciais",
+        summary: "Anotar e registrar dados incompletos ou inverídicos sobre a assistência prestada no prontuário.",
+        fullText: "Art. 35 Registrar informações parciais e inverídicas sobre a assistência prestada.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>`
+      },
+
+      // BLOCO 3 — RELAÇÕES COM OS TRABALHADORES DE ENFERMAGEM, SAÚDE E OUTROS
+      {
+        id: "art42",
+        artNumber: "Art. 42",
+        blockId: "3",
+        blockName: "Bloco 3: Trab. Enfermagem e Saúde",
+        scope: "all",
+        title: "Assinatura de Atos Não Executados",
+        summary: "Assinar ações que não executou pessoalmente, ou permitir que suas próprias ações sejam assinadas por outrem.",
+        fullText: "Art. 42 Assinar as ações de enfermagem que não executou, bem como permitir que suas ações sejam assinadas por outro profissional.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>`
+      },
+      {
+        id: "art43",
+        artNumber: "Art. 43",
+        blockId: "3",
+        blockName: "Bloco 3: Trab. Enfermagem e Saúde",
+        scope: "all",
+        title: "Descumprir Normas Bioéticas",
+        summary: "Descumprir leis sobre transplantes, tecidos, esterilização humana, reprodução assistida e manipulação genética.",
+        fullText: "Art. 43 Colaborar, direta ou indiretamente, com outros profissionais de saúde no descumprimento da legislação referente aos transplantes de órgãos, tecidos, esterilização humana, fecundação artificial e manipulação genética.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>`
+      },
+
+      // BLOCO 4 — RELAÇÕES COM AS ORGANIZAÇÕES DA CATEGORIA
+      {
+        id: "art56",
+        artNumber: "Art. 56",
+        blockId: "4",
+        blockName: "Bloco 4: Org. da Categoria",
+        scope: "all",
+        title: "Atos Contrários ao Código",
+        summary: "Executar ou ordenar a execução de atos contrários ao Código de Ética e normas do Sistema COFEN/COREN.",
+        fullText: "Art. 56 Executar e determinar a execução de atos contrários ao Código de Ética e às demais normas que regulam o exercício da Enfermagem.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>`
+      },
+      {
+        id: "art57",
+        artNumber: "Art. 57",
+        blockId: "4",
+        blockName: "Bloco 4: Org. da Categoria",
+        scope: "all",
+        title: "Aceitar Emprego por Demissão Ética",
+        summary: "Aceitar vaga originada de demissão ou recusa motivada pela defesa da lei ou do cumprimento do Código de Ética.",
+        fullText: "Art. 57 Aceitar cargo, função ou emprego vago em decorrência de fatos que envolvam recusa ou demissão motivada pela necessidade do profissional em cumprir o Código e a legislação.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`
+      },
+      {
+        id: "art58",
+        artNumber: "Art. 58",
+        blockId: "4",
+        blockName: "Bloco 4: Org. da Categoria",
+        scope: "all",
+        title: "Dano ao Patrimônio da Entidade",
+        summary: "Realizar ou facilitar atos que causem prejuízo patrimonial ou desvirtuem as finalidades dos conselhos e órgãos.",
+        fullText: "Art. 58 Realizar ou facilitar ações que causem prejuízo ao patrimônio ou comprometam a finalidade das organizações da categoria.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`
+      },
+      {
+        id: "art59",
+        artNumber: "Art. 59",
+        blockId: "4",
+        blockName: "Bloco 4: Org. da Categoria",
+        scope: "all",
+        title: "Falsidade ou Omissão ao COREN",
+        summary: "Negar, omitir dados ou emitir declaração falsa quando formalmente solicitado pelo Conselho Regional de Enfermagem.",
+        fullText: "Art. 59 Negar, omitir informações ou emitir falsas declarações sobre o exercício profissional quando solicitado pelo Conselho Regional de Enfermagem.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`
+      },
+
+      // BLOCO 5 — RELAÇÕES COM AS ORGANIZAÇÕES EMPREGADORAS
+      {
+        id: "art73",
+        artNumber: "Art. 73",
+        blockId: "5",
+        blockName: "Bloco 5: Org. Empregadoras",
+        scope: "all",
+        title: "Cumplicidade com Empregadores Ilícitos",
+        summary: "Trabalhar ou acumpliciar-se com empresas ou pessoas que desrespeitem as normas do exercício da enfermagem.",
+        fullText: "Art. 73 Trabalhar, colaborar ou acumpliciar-se com pessoas físicas ou jurídicas que desrespeitem princípios e normas que regulam o exercício profissional de enfermagem.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`
+      },
+      {
+        id: "art74",
+        artNumber: "Art. 74",
+        blockId: "5",
+        blockName: "Bloco 5: Org. Empregadoras",
+        scope: "all",
+        title: "Concorrência Desleal por Vaga",
+        summary: "Pleitear emprego ou cargo já ocupado por colega valendo-se de manobras ou deslealdade ética.",
+        fullText: "Art. 74 Pleitear cargo, função ou emprego ocupado por colega, utilizando-se de concorrência desleal.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>`
+      },
+      {
+        id: "art75",
+        artNumber: "Art. 75",
+        blockId: "5",
+        blockName: "Bloco 5: Org. Empregadoras",
+        scope: "all",
+        title: "Vínculo Fictício ou Fantasma",
+        summary: "Permitir figurar formalmente no quadro de enfermagem de um serviço sem ali desempenhar a função assistencial real.",
+        fullText: "Art. 75 Permitir que seu nome conste no quadro de pessoal de instituição de saúde sem nele exercer as funções de enfermagem pressupostas.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2H9.17A3.001 3.001 0 0112 14z"/></svg>`
+      },
+      {
+        id: "art76",
+        artNumber: "Art. 76",
+        blockId: "5",
+        blockName: "Bloco 5: Org. Empregadoras",
+        scope: "all",
+        title: "Vantagens Indevidas e Privilégios",
+        summary: "Receber valores, gorjetas ou privilégios de clientes/empresas como forma de favorecimento assistencial.",
+        fullText: "Art. 76 Receber vantagens de instituição, empresa, pessoa, família e coletividade, além do que lhe é devido, como forma de garantir assistência diferenciada ou benefícios.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`
+      },
+      {
+        id: "art77",
+        artNumber: "Art. 77",
+        blockId: "5",
+        blockName: "Bloco 5: Org. Empregadoras",
+        scope: "all",
+        title: "Pressão e Suborno",
+        summary: "Usar coação moral, coação física ou suborno financeiro para obter facilidades ou regalias profissionais.",
+        fullText: "Art. 77 Usar de qualquer mecanismo de pressão ou suborno com pessoas físicas ou jurídicas para conseguir qualquer tipo de vantagem.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>`
+      },
+      {
+        id: "art78",
+        artNumber: "Art. 78",
+        blockId: "5",
+        blockName: "Bloco 5: Org. Empregadoras",
+        scope: "all",
+        title: "Abuso de Poder e Assédio Moral/Sexual",
+        summary: "Valer-se da hierarquia para constranger, assediar sexual ou moralmente, humilhar pessoas ou sabotar o trabalho.",
+        fullText: "Art. 78 Utilizar, de forma abusiva, o poder que lhe confere a posição ou cargo, para impor ordens, opiniões, atentar contra o pudor, assediar sexual ou moralmente, inferiorizar pessoas ou dificultar o exercício profissional.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>`
+      },
+      {
+        id: "art79",
+        artNumber: "Art. 79",
+        blockId: "5",
+        blockName: "Bloco 5: Org. Empregadoras",
+        scope: "all",
+        title: "Apropriação Indébita e Peculato",
+        summary: "Apropriar-se ou desviar dinheiro, insumos, medicamentos ou bens sob sua guarda em proveito próprio ou alheio.",
+        fullText: "Art. 79 Apropriar-se de dinheiro, valor, bem móvel ou imóvel, público ou particular, de que tenha posse em razão do cargo, ou desviá-lo em proveito próprio ou de outrem.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>`
+      },
+      {
+        id: "art80",
+        artNumber: "Art. 80",
+        blockId: "5",
+        blockName: "Bloco 5: Org. Empregadoras",
+        scope: "nurse", // ESPECÍFICO DO ENFERMEIRO
+        title: "Delegar Atividades Privativas",
+        summary: "O Enfermeiro delegar suas atribuições legais privativas (consulta de enfermagem, SAE, prescrição) a técnicos ou não enfermeiros.",
+        fullText: "Art. 80 Delegar suas atividades privativas a outro membro da equipe de enfermagem ou de saúde que não seja enfermeiro.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>`
+      },
+
+      // BLOCO 6 — SIGILO PROFISSIONAL
+      {
+        id: "art84",
+        artNumber: "Art. 84",
+        blockId: "6",
+        blockName: "Bloco 6: Sigilo Profissional",
+        scope: "all",
+        title: "Quebra de Sigilo em Documentos",
+        summary: "Liberar acesso a prontuários e laudos a terceiros não envolvidos na assistência, fora dos casos judiciais.",
+        fullText: "Art. 84 Franquear o acesso a informações e documentos para pessoas que não estão diretamente envolvidas na prestação da assistência, exceto nos casos previstos na legislação vigente ou por ordem judicial.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>`
+      },
+      {
+        id: "art85",
+        artNumber: "Art. 85",
+        blockId: "6",
+        blockName: "Bloco 6: Sigilo Profissional",
+        scope: "all",
+        title: "Divulgação de Casos Identificáveis",
+        summary: "Expor situações clínicas ou fatos de forma que o paciente ou seus familiares possam ser reconhecidos.",
+        fullText: "Art. 85 Divulgar ou fazer referência a casos, situações ou fatos de forma que os envolvidos possam ser identificados.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`
+      },
+
+      // BLOCO 7 — ENSINO, PESQUISA E PRODUÇÃO TÉCNICO-CIENTÍFICA
+      {
+        id: "art94",
+        artNumber: "Art. 94",
+        blockId: "7",
+        blockName: "Bloco 7: Ensino, Pesquisa e Produção",
+        scope: "all",
+        title: "Pesquisa Lesiva ou Danosa",
+        summary: "Participar de pesquisas em que a integridade física/moral ou os direitos dos participantes sofram dano.",
+        fullText: "Art. 94 Realizar ou participar de atividades de ensino e pesquisa em que o direito inalienável da pessoa, família ou coletividade seja desrespeitado ou que ofereça qualquer tipo de risco ou dano aos envolvidos.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>`
+      },
+      {
+        id: "art95",
+        artNumber: "Art. 95",
+        blockId: "7",
+        blockName: "Bloco 7: Ensino, Pesquisa e Produção",
+        scope: "nurse", // ESPECÍFICO DO ENFERMEIRO
+        title: "Omissão na Supervisão de Estagiários",
+        summary: "O Enfermeiro docente, supervisor ou responsável eximir-se de responder por erros ou atos de alunos/estagiários.",
+        fullText: "Art. 95 Eximir-se da responsabilidade por atividades executadas por alunos ou estagiários, na condição de docente, enfermeiro responsável ou supervisor.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>`
+      },
+      {
+        id: "art96",
+        artNumber: "Art. 96",
+        blockId: "7",
+        blockName: "Bloco 7: Ensino, Pesquisa e Produção",
+        scope: "all",
+        title: "Ciência Acima da Pessoa",
+        summary: "Sobrepor o interesse puramente acadêmico ou científico à segurança, saúde e bem-estar do ser humano.",
+        fullText: "Art. 96 Sobrepor o interesse da ciência ao interesse e segurança da pessoa, família ou coletividade.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`
+      },
+      {
+        id: "art97",
+        artNumber: "Art. 97",
+        blockId: "7",
+        blockName: "Bloco 7: Ensino, Pesquisa e Produção",
+        scope: "all",
+        title: "Fraude e Manipulação Científica",
+        summary: "Falsificar, forjar dados estatísticos ou desviar a finalidade declarada dos projetos de pesquisa.",
+        fullText: "Art. 97 Falsificar ou manipular resultados de pesquisa, bem como usá-los para fins diferentes dos pré-determinados.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>`
+      },
+      {
+        id: "art98",
+        artNumber: "Art. 98",
+        blockId: "7",
+        blockName: "Bloco 7: Ensino, Pesquisa e Produção",
+        scope: "all",
+        title: "Identificação Indevida de Participante",
+        summary: "Publicar dados ou imagens de sujeitos de pesquisa sem expressa anuência informada.",
+        fullText: "Art. 98 Publicar trabalho com elementos que identifiquem o sujeito participante do estudo sem sua autorização.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0"/></svg>`
+      },
+      {
+        id: "art99",
+        artNumber: "Art. 99",
+        blockId: "7",
+        blockName: "Bloco 7: Ensino, Pesquisa e Produção",
+        scope: "all",
+        title: "Omissão ou Falsa Autoria",
+        summary: "Publicar produção que não realizou ou suprimir os legítimos nomes de coautores e colaboradores.",
+        fullText: "Art. 99 Divulgar ou publicar, em seu nome, produção técnico-científica ou instrumento de organização formal do qual não tenha participado ou omitir nomes de coautores e colaboradores.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>`
+      },
+      {
+        id: "art100",
+        artNumber: "Art. 100",
+        blockId: "7",
+        blockName: "Bloco 7: Ensino, Pesquisa e Produção",
+        scope: "all",
+        title: "Uso de Dados Não Publicados sem Anuência",
+        summary: "Aproveitar informações inéditas ou manuscritos de colegas sem prévia autorização e crédito formal.",
+        fullText: "Art. 100 Utilizar sem referência ao autor ou sem a sua autorização expressa, dados, informações ou opiniões ainda não publicados.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/></svg>`
+      },
+      {
+        id: "art101",
+        artNumber: "Art. 101",
+        blockId: "7",
+        blockName: "Bloco 7: Ensino, Pesquisa e Produção",
+        scope: "all",
+        title: "Plágio e Apropriação Científica",
+        summary: "Apropriar-se de produção técnico-científica sem a devida concordância ou cessão formal do real criador.",
+        fullText: "Art. 101 Apropriar-se ou utilizar produções técnico-científicas, das quais tenha participado como autor ou não, sem concordância ou concessão do autor.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`
+      },
+      {
+        id: "art102",
+        artNumber: "Art. 102",
+        blockId: "7",
+        blockName: "Bloco 7: Ensino, Pesquisa e Produção",
+        scope: "all",
+        title: "Autoria por Coação Hierárquica",
+        summary: "Aproveitar-se de chefia ou cargo de gestão para exigir inclusão de seu nome em artigos e obras.",
+        fullText: "Art. 102 Aproveitar-se de posição hierárquica para fazer constar seu nome como autor ou coautor em obra técnico-científica.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>`
+      },
+
+      // BLOCO 8 — PUBLICIDADE
+      {
+        id: "art107",
+        artNumber: "Art. 107",
+        blockId: "8",
+        blockName: "Bloco 8: Publicidade",
+        scope: "all",
+        title: "Desinformação e Notícias Falsas",
+        summary: "Disseminar informações inverídicas, sensacionalistas ou sem evidência técnica na área de saúde.",
+        fullText: "Art. 107 Divulgar informação inverídica sobre assunto de sua área profissional.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>`
+      },
+      {
+        id: "art108",
+        artNumber: "Art. 108",
+        blockId: "8",
+        blockName: "Bloco 8: Publicidade",
+        scope: "all",
+        title: "Imagens Não Autorizadas de Pacientes",
+        summary: "Veicular fotografias ou registros capazes de expor pacientes ou serviços sem consentimento por escrito.",
+        fullText: "Art. 108 Inserir imagens ou informações que possam identificar pessoas e instituições sem sua prévia autorização.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>`
+      },
+      {
+        id: "art109",
+        artNumber: "Art. 109",
+        blockId: "8",
+        blockName: "Bloco 8: Publicidade",
+        scope: "all",
+        title: "Anúncio de Título Inexistente",
+        summary: "Divulgar titulação acadêmica, pós-graduação ou especialidade profissional sem comprovação legal no COREN.",
+        fullText: "Art. 109 Anunciar título ou qualificação que não possa comprovar.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>`
+      },
+      {
+        id: "art110",
+        artNumber: "Art. 110",
+        blockId: "8",
+        blockName: "Bloco 8: Publicidade",
+        scope: "all",
+        title: "Ocultação de Créditos Institucionais",
+        summary: "Omitir referências a hospitais, universidades ou equipes em proveito de marketing pessoal exclusivo.",
+        fullText: "Art. 110 Omitir em proveito próprio, referência a pessoas ou instituições.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>`
+      },
+      {
+        id: "art111",
+        artNumber: "Art. 111",
+        blockId: "8",
+        blockName: "Bloco 8: Publicidade",
+        scope: "all",
+        title: "Mercantilização e Concorrência Desleal",
+        summary: "Anunciar atendimento gratuito ou aviltar honorários praticando concorrência predatória com os pares.",
+        fullText: "Art. 111 Anunciar a prestação de serviços gratuitos ou propor honorários que caracterizem concorrência desleal.",
+        icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`
+      }
+    ];
+
+    // ESTADO DA APLICAÇÃO
+    let currentRoleFilter = "all";   // all, nurse, tech, aux
+    let currentBlockFilter = "all";  // all, 1, 2, 3, 4, 5, 6, 7, 8
+    let currentSearchTerm = "";
+
+    // RESPOSTAS DO QUIZ
+    const QUIZ_ANSWERS = {
+      1: {
+        correct: "proibido",
+        explanation: "<strong>RESPOSTA CORRETA: É PROIBIDO!</strong><br>Conforme o <strong>Art. 26</strong>, é vedado expressamente <em>'Negar assistência de enfermagem em qualquer situação que se caracterize como urgência ou emergência'</em>. O intervalo de descanso não suprime a obrigação imediata de socorro à vida humana."
+      },
+      2: {
+        correct: "proibido",
+        explanation: "<strong>RESPOSTA CORRETA: É PROIBIDO!</strong><br>Conforme o <strong>Art. 42</strong>, é terminantemente proibido <em>'Assinar as ações de enfermagem que não executou, bem como permitir que suas ações sejam assinadas por outro profissional'</em>. Cada profissional responde estritamente por suas anotações e procedimentos."
+      },
+      3: {
+        correct: "permitido",
+        explanation: "<strong>RESPOSTA CORRETA: É CONDUTA PERMITIDA!</strong><br>O <strong>Art. 80</strong> proíbe ao Enfermeiro <em>'Delegar suas atividades PRIVATIVAS a outro membro da equipe de enfermagem ou de saúde que não seja enfermeiro'</em>. O curativo em ferida sem complexidade em paciente estável é procedimento integrante do escopo de técnicos de enfermagem sob orientação/supervisão do Enfermeiro, sendo plenamente legal."
+      },
+      4: {
+        correct: "proibido",
+        explanation: "<strong>RESPOSTA CORRETA: É PROIBIDO!</strong><br>Infringe frontalmente os <strong>Arts. 85 e 108</strong> do Código de Ética (além da LGPD e direitos de personalidade). É vedado fazer referências ou expor imagens e dados que permitam a identificação de pacientes sem autorização formal expressa."
+      }
+    };
+
+    let quizResults = { 1: null, 2: null, 3: null, 4: null };
+
+    // INICIALIZAÇÃO
+    document.addEventListener("DOMContentLoaded", () => {
+      renderCards();
+      setupEventListeners();
+    });
+
+    function setupEventListeners() {
+      // Role Chips
+      document.querySelectorAll("#roleChipsContainer .chip-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("#roleChipsContainer .chip-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentRoleFilter = btn.dataset.role;
+          updateRoleLabel();
+          renderCards();
+        });
+      });
+
+      // Block Chips
+      document.querySelectorAll("#blockChipsContainer .chip-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("#blockChipsContainer .chip-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentBlockFilter = btn.dataset.block;
+          renderCards();
+        });
+      });
+
+      // Search input
+      const searchInput = document.getElementById("searchInput");
+      searchInput.addEventListener("input", (e) => {
+        currentSearchTerm = e.target.value.trim().toLowerCase();
+        renderCards();
+      });
+
+      // Reset button
+      document.getElementById("btnResetFilters").addEventListener("click", resetAllFilters);
+
+      // Keyboard Esc para fechar modal
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeArticleModal();
+      });
+    }
+
+    function updateRoleLabel() {
+      const label = document.getElementById("statScopeCount");
+      if (currentRoleFilter === "all") label.textContent = "Mostrando todas";
+      else if (currentRoleFilter === "nurse") label.textContent = "Filtrando: Enfermeiro";
+      else if (currentRoleFilter === "tech") label.textContent = "Filtrando: Técnico em Enfermagem";
+      else if (currentRoleFilter === "aux") label.textContent = "Filtrando: Auxiliar de Enfermagem";
+    }
+
+    // Filtragem de dados
+    function getFilteredData() {
+      return PROHIBITIONS_DATA.filter(item => {
+        // Filtro por profissão:
+        // Se a proibição for 'all', aplica-se a todos os profissionais
+        // Se for 'nurse', aplica-se apenas quando o filtro for 'all' ou 'nurse'
+        // Se o usuário selecionou 'tech' ou 'aux', os artigos específicos do enfermeiro (Arts 80 e 95) não recaem sobre eles
+        if (currentRoleFilter === "tech" || currentRoleFilter === "aux") {
+          if (item.scope === "nurse") return false;
+        }
+
+        // Filtro por bloco
+        if (currentBlockFilter !== "all" && item.blockId !== currentBlockFilter) {
+          return false;
+        }
+
+        // Busca por texto
+        if (currentSearchTerm) {
+          const matchArt = item.artNumber.toLowerCase().includes(currentSearchTerm);
+          const matchTitle = item.title.toLowerCase().includes(currentSearchTerm);
+          const matchSummary = item.summary.toLowerCase().includes(currentSearchTerm);
+          const matchFull = item.fullText.toLowerCase().includes(currentSearchTerm);
+          if (!matchArt && !matchTitle && !matchSummary && !matchFull) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+    }
+
+    // Renderização dos cartões
+    function renderCards() {
+      const grid = document.getElementById("prohibitionsGrid");
+      const empty = document.getElementById("emptyState");
+      const filtered = getFilteredData();
+
+      document.getElementById("visibleCount").textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = "";
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+      grid.innerHTML = filtered.map(item => {
+        const isNurseOnly = item.scope === "nurse";
+        const scopeBadgeText = isNurseOnly ? "Específico: Enfermeiro" : "Todos os profissionais";
+        const scopeClass = isNurseOnly ? "scope-tag nurse-only" : "scope-tag";
+
+        return `
+          <article class="prohibition-card shell-fade" onclick="openArticleModal('${item.id}')" tabindex="0" onkeydown="if(event.key==='Enter') openArticleModal('${item.id}')" aria-label="${item.artNumber}: ${item.title}">
+            <div>
+              <div class="card-top">
+                <span class="art-badge">${item.artNumber}</span>
+                <span class="${scopeClass}">${scopeBadgeText}</span>
+              </div>
+              <div class="card-chapter">${item.blockName}</div>
+              <div class="card-header-main">
+                <div class="card-icon" aria-hidden="true">${item.icon}</div>
+                <h3 class="card-title">${item.title}</h3>
+              </div>
+              <p class="card-summary">${item.summary}</p>
+            </div>
+            <div class="card-action">
+              <span>Ler artigo completo</span>
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 5l7 7-7 7"/></svg>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    // Modal
+    function openArticleModal(itemId) {
+      const item = PROHIBITIONS_DATA.find(i => i.id === itemId);
+      if (!item) return;
+
+      document.getElementById("modalChapterBadge").textContent = item.blockName;
+      document.getElementById("modalArtTitle").textContent = `${item.artNumber} — ${item.title}`;
+      document.getElementById("modalArtFullText").textContent = item.fullText;
+      
+      const scopeLabel = item.scope === "nurse" 
+        ? "Exclusivo do Enfermeiro (Artigo com foco na privativa / responsabilidade de coordenação/ensino)."
+        : "Aplica-se a todos os profissionais de Enfermagem (Enfermeiros, Técnicos e Auxiliares).";
+      document.getElementById("modalScopeText").textContent = scopeLabel;
+
+      const modal = document.getElementById("articleModal");
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeArticleModal() {
+      const modal = document.getElementById("articleModal");
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+
+    function handleModalOverlayClick(event) {
+      if (event.target === document.getElementById("articleModal")) {
+        closeArticleModal();
+      }
+    }
+
+    // Reset filters
+    function resetAllFilters() {
+      currentRoleFilter = "all";
+      currentBlockFilter = "all";
+      currentSearchTerm = "";
+      
+      document.getElementById("searchInput").value = "";
+      
+      document.querySelectorAll("#roleChipsContainer .chip-btn").forEach(b => b.classList.remove("active"));
+      document.querySelector('#roleChipsContainer .chip-btn[data-role="all"]').classList.add("active");
+      
+      document.querySelectorAll("#blockChipsContainer .chip-btn").forEach(b => b.classList.remove("active"));
+      document.querySelector('#blockChipsContainer .chip-btn[data-block="all"]').classList.add("active");
+
+      updateRoleLabel();
+      renderCards();
+    }
+
+    // LÓGICA DO QUIZ
+    function checkAnswer(scenarioId, userAnswer) {
+      const scenario = QUIZ_ANSWERS[scenarioId];
+      if (!scenario) return;
+
+      const card = document.getElementById(`quizCard${scenarioId}`);
+      const feedbackEl = document.getElementById(`feedback${scenarioId}`);
+      const buttons = card.querySelectorAll(".btn-quiz");
+
+      // Desabilita os botões para este cenário
+      buttons.forEach(btn => btn.disabled = true);
+
+      const isCorrect = (userAnswer === scenario.correct);
+      quizResults[scenarioId] = isCorrect;
+
+      feedbackEl.style.display = "block";
+      if (isCorrect) {
+        feedbackEl.className = "quiz-feedback feedback-correct";
+        feedbackEl.innerHTML = `<strong>Correto!</strong> ` + scenario.explanation;
+      } else {
+        feedbackEl.className = "quiz-feedback feedback-incorrect";
+        feedbackEl.innerHTML = `<strong>Incorreto.</strong> ` + scenario.explanation;
+      }
+
+      // Verifica se respondeu todos os 4
+      checkQuizCompletion();
+    }
+
+    function checkQuizCompletion() {
+      const answers = Object.values(quizResults);
+      if (answers.every(a => a !== null)) {
+        const totalCorrect = answers.filter(a => a === true).length;
+        const scoreBox = document.getElementById("quizScoreBox");
+        const scoreText = document.getElementById("quizScoreText");
+        
+        scoreText.innerHTML = `Você acertou <strong>${totalCorrect} de 4</strong> cenários éticos (${(totalCorrect/4)*100}% de aproveitamento). Continue revisando as proibições para garantir uma assistência respaldada!`;
+        scoreBox.style.display = "block";
+        scoreBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function resetQuiz() {
+      quizResults = { 1: null, 2: null, 3: null, 4: null };
+      for (let i = 1; i <= 4; i++) {
+        const card = document.getElementById(`quizCard${i}`);
+        card.querySelectorAll(".btn-quiz").forEach(btn => btn.disabled = false);
+        const fb = document.getElementById(`feedback${i}`);
+        fb.style.display = "none";
+        fb.innerHTML = "";
+      }
+      document.getElementById("quizScoreBox").style.display = "none";
+    }
+  </script>
+<script>
+/* Skip artifact shell — fixed helpers served beside every artifact. */
+(function () {
+  "use strict";
+
+  var fmt = {
+    num: function (v, opts) { return new Intl.NumberFormat("pt-BR", opts || {}).format(v); },
+    brl: function (v) { return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v); },
+    pct: function (v) { return new Intl.NumberFormat("pt-BR", { style: "percent", maximumFractionDigits: 1 }).format(v); }
+  };
+
+  // axisFmt keeps axis tick labels short (compact notation) so long values
+  // (e.g. full BRL amounts) never clip against the plot edge.
+  function axisFmt(v) {
+    return fmt.num(v, { notation: "compact", maximumFractionDigits: 1 });
+  }
+
+  // format accepts a function OR one of the fmt names ("num" | "brl" | "pct").
+  function coerceFormat(spec) {
+    if (typeof spec === "function") return spec;
+    if (typeof spec === "string" && fmt[spec]) return fmt[spec];
+    return function (v) { return fmt.num(v); };
+  }
+
+  function accent() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#2563eb";
+  }
+  function mutedColor() {
+    return getComputedStyle(document.documentElement).getPropertyValue("--text-muted").trim() || "#5b6472";
+  }
+  function svgEl(tag, attrs) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+    for (var k in attrs) el.setAttribute(k, attrs[k]);
+    return el;
+  }
+  function frame(el, w, h) {
+    var svg = svgEl("svg", { viewBox: "0 0 " + w + " " + h, role: "img" });
+    el.innerHTML = "";
+    el.appendChild(svg);
+    return svg;
+  }
+
+  // maxOf guards the axis scale: empty values would give -Infinity (truthy,
+  // so "|| 1" can't catch it) and a non-positive max would flip the chart.
+  function maxOf(values) {
+    var m = values.length ? Math.max.apply(null, values) : 0;
+    return m > 0 ? m : 1;
+  }
+
+  // bar(el, {labels:[], values:[], color?, format?}) — vertical bar chart.
+  function bar(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 12, plotH = H - padT - padB;
+    var step = plotW / n, bw = Math.min(step * 0.62, 64);
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 12, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    cfg.values.forEach(function (v, i) {
+      var bh = Math.max(0, (v / max) * plotH);
+      var x = padL + i * step + (step - bw) / 2;
+      var y = padT + plotH - bh;
+      var r = svgEl("rect", { x: x, y: y, width: bw, height: bh, rx: 4, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(v);
+      r.appendChild(t);
+      svg.appendChild(r);
+      var tx = svgEl("text", { x: x + bw / 2, y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // line(el, {labels:[], values:[], color?, format?}) — single-series line.
+  function line(el, cfg) {
+    var W = 640, H = 280, padL = 46, padB = 30, padT = 12;
+    var svg = frame(el, W, H);
+    var max = maxOf(cfg.values);
+    var n = cfg.values.length;
+    var plotW = W - padL - 16, plotH = H - padT - padB;
+    var color = cfg.color || accent();
+    var f = coerceFormat(cfg.format);
+    for (var g = 0; g <= 4; g++) {
+      var gy = padT + plotH - (plotH * g) / 4;
+      svg.appendChild(svgEl("line", { x1: padL, y1: gy, x2: W - 16, y2: gy, stroke: "currentColor", "stroke-opacity": 0.08 }));
+      var lbl = svgEl("text", { x: padL - 8, y: gy + 4, "text-anchor": "end", "font-size": 10, fill: mutedColor() });
+      lbl.textContent = axisFmt((max * g) / 4);
+      svg.appendChild(lbl);
+    }
+    var pts = cfg.values.map(function (v, i) {
+      var x = padL + (n === 1 ? plotW / 2 : (plotW * i) / (n - 1));
+      var y = padT + plotH - (v / max) * plotH;
+      return [x, y];
+    });
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+    svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: color, "stroke-width": 2, "stroke-linejoin": "round" }));
+    pts.forEach(function (p, i) {
+      var c = svgEl("circle", { cx: p[0], cy: p[1], r: 3.5, fill: color });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + f(cfg.values[i]);
+      c.appendChild(t);
+      svg.appendChild(c);
+      var tx = svgEl("text", { x: p[0], y: H - 10, "text-anchor": "middle", "font-size": 11, fill: mutedColor() });
+      tx.textContent = cfg.labels[i];
+      svg.appendChild(tx);
+    });
+  }
+
+  // donut(el, {labels:[], values:[], colors?}) — donut with center total.
+  function donut(el, cfg) {
+    var W = 320, H = 280, cx = W / 2, cy = H / 2, R = 92, r = 58;
+    var svg = frame(el, W, H);
+    var total = cfg.values.reduce(function (a, b) { return a + b; }, 0) || 1;
+    var palette = cfg.colors || [accent(), "#1baf7a", "#eda100", "#e34948", "#4a3aa7", "#e87ba4"];
+    var a0 = -Math.PI / 2;
+    cfg.values.forEach(function (v, i) {
+      var a1 = a0 + (v / total) * Math.PI * 2;
+      var large = a1 - a0 > Math.PI ? 1 : 0;
+      var p = ["M", cx + R * Math.cos(a0), cy + R * Math.sin(a0),
+        "A", R, R, 0, large, 1, cx + R * Math.cos(a1), cy + R * Math.sin(a1),
+        "L", cx + r * Math.cos(a1), cy + r * Math.sin(a1),
+        "A", r, r, 0, large, 0, cx + r * Math.cos(a0), cy + r * Math.sin(a0), "Z"].join(" ");
+      var path = svgEl("path", { d: p, fill: palette[i % palette.length] });
+      var t = svgEl("title", {});
+      t.textContent = cfg.labels[i] + ": " + fmt.num(v) + " (" + fmt.pct(v / total) + ")";
+      path.appendChild(t);
+      svg.appendChild(path);
+      a0 = a1;
+    });
+    var center = svgEl("text", { x: cx, y: cy + 5, "text-anchor": "middle", "font-size": 20, "font-weight": 650, fill: "currentColor" });
+    center.textContent = fmt.num(total);
+    svg.appendChild(center);
+  }
+
+  window.skipShell = { fmt: fmt };
+  window.skipChart = { bar: bar, line: line, donut: donut };
+})();
+
+</script>
+</body>
+</html>
